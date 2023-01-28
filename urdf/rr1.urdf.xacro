@@ -1,0 +1,149 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="robot_name">
+
+    <!-- Properties -->
+    <xacro:property name="PI" value="3.14159265359" />
+    <xacro:property name="effort" value="30" />
+    <xacro:property name="velocity" value="10" />
+
+    <xacro:property name="model_offset" value="-0.052 -0.012986 0.179" />
+    <xacro:property name="model_scale" value="0.001 0.001 0.001" />
+
+    <!-- Links -->
+    <link name="world" />
+
+    <link name="base_link">
+        <visual>
+            <origin rpy="0 0 0" xyz="${model_offset}" />
+            <geometry>
+                <mesh filename="package://rr1_description/mesh/visual/01_RR1_base.dae"
+                    scale="${model_scale}" />
+            </geometry>
+        </visual>
+    </link>
+
+    <link name="shoulder_link">
+        <visual>
+            <origin rpy="0 0 0" xyz="-0.052 -0.012986 0.109" />
+            <geometry>
+                <mesh filename="package://rr1_description/mesh/visual/02_RR1_shoulder.dae"
+                    scale="${model_scale}" />
+            </geometry>
+        </visual>
+    </link>
+
+    <link name="upper_arm_link">
+        <visual>
+            <origin rpy="0 0 0" xyz="0 -0.013 0" />
+            <geometry>
+                <mesh filename="package://rr1_description/mesh/visual/03_RR1_upper_arm.dae"
+                    scale="${model_scale}" />
+            </geometry>
+        </visual>
+    </link>
+
+    <!-- <link name="elbow_link">
+        <visual>
+            <origin rpy="0 0 0"
+    xyz="${model_offset}" />
+            <geometry>
+                <mesh
+    filename="package://rr1_description/mesh/visual/04_RR1_elbow.dae"
+                    scale="${model_scale}"
+    />
+            </geometry>
+        </visual>
+    </link> -->
+
+    <!-- <link name="forearm_link">
+        <visual>
+            <origin rpy="0 0 0"
+    xyz="${model_offset}" />
+            <geometry>
+                <mesh
+    filename="package://rr1_description/mesh/visual/05_RR1_forearm.dae"
+                    scale="${model_scale}"
+    />
+            </geometry>
+        </visual>
+    </link> -->
+
+    <!-- <link name="wrist_link">
+        <visual>
+            <origin rpy="0 0 0"
+    xyz="${model_offset}" />
+            <geometry>
+                <mesh
+    filename="package://rr1_description/mesh/visual/06_RR1_wrist.dae"
+                    scale="${model_scale}"
+    />
+            </geometry>
+        </visual>
+    </link> -->
+
+    <!-- <link name="hand_link">
+        <visual>
+            <origin rpy="0 0 0"
+    xyz="${model_offset}" />
+            <geometry>
+                <mesh
+    filename="package://rr1_description/mesh/visual/07_RR1_hand.dae"
+                    scale="${model_scale}"
+    />
+            </geometry>
+        </visual>
+    </link> -->
+
+
+    <!-- Joints -->
+    <joint name="virtual_joint" type="fixed">
+        <parent link="world" />
+        <child link="base_link" />
+        <origin xyz="0 0 0" />
+    </joint>
+
+    <joint name="joint_1" type="revolute">
+        <parent link="base_link" />
+        <child link="shoulder_link" />
+        <origin xyz="0 0 0.07" />
+        <axis xyz="0 0 1" />
+        <limit lower="-${PI}" upper="${PI}" effort="${effort}" velocity="${velocity}" />
+    </joint>
+
+    <joint name="joint_2" type="revolute">
+        <parent link="shoulder_link" />
+        <child link="upper_arm_link" />
+        <origin xyz="-0.052 0 0.109" />
+        <axis xyz="0 1 0" />
+        <limit lower="-${PI/2}" upper="${PI/2}" effort="${effort}" velocity="${velocity}" />
+    </joint>
+
+    <!-- <joint name="joint_3" type="fixed">
+        <parent link="upper_arm_link" />
+        <child
+    link="elbow_link" />
+        <origin xyz="0 0 0" />
+    </joint> -->
+
+    <!-- <joint name="joint_4" type="fixed">
+        <parent link="elbow_link" />
+        <child
+    link="forearm_link" />
+        <origin xyz="0 0 0" />
+    </joint> -->
+
+    <!-- <joint name="joint_5" type="fixed">
+        <parent link="forearm_link" />
+        <child
+    link="wrist_link" />
+        <origin xyz="0 0 0" />
+    </joint> -->
+
+    <!-- <joint name="joint_6" type="fixed">
+        <parent link="wrist_link" />
+        <child
+    link="hand_link" />
+        <origin xyz="0 0 0" />
+    </joint> -->
+
+</robot>
