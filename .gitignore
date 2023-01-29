@@ -133,3 +133,4 @@ dmypy.json
 
 # Blender files
 *.blend
+*.blend1
