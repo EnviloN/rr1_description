@@ -1,20 +1,23 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="robot_name">
 
+    <!-- Includes -->
+    <xacro:include filename="includes/constants.xacro" />
+    <xacro:include filename="includes/inertial_macros.xacro" />
+
     <!-- Properties -->
-    <xacro:property name="PI" value="3.14159265359" />
     <xacro:property name="effort" value="30" />
     <xacro:property name="velocity" value="10" />
 
-    <xacro:property name="model_offset" value="-0.052 -0.012986 0.179" />
     <xacro:property name="model_scale" value="0.001 0.001 0.001" />
 
-    <!-- Links -->
+    <!-- We need a world link because we want the base link of the robot to be anchored to it -->
     <link name="world" />
 
+    <!-- Base -->
     <link name="base_link">
         <visual>
-            <origin rpy="0 0 0" xyz="${model_offset}" />
+            <origin rpy="0 0 0" xyz="-0.052 -0.013 0.179" />
             <geometry>
                 <mesh filename="package://rr1_description/mesh/visual/01_RR1_base.dae"
                     scale="${model_scale}" />
@@ -22,6 +25,14 @@
         </visual>
     </link>
 
+    <joint name="virtual_joint" type="fixed">
+        <parent link="world" />
+        <child link="base_link" />
+        <origin xyz="0 0 0" />
+    </joint>
+
+
+    <!-- Shoulder -->
     <link name="shoulder_link">
         <visual>
             <origin rpy="0 0 0" xyz="-0.052 -0.013 0.109" />
@@ -32,6 +43,16 @@
         </visual>
     </link>
 
+    <joint name="shoulder_joint" type="revolute">
+        <parent link="base_link" />
+        <child link="shoulder_link" />
+        <origin xyz="0 0 0.07" />
+        <axis xyz="0 0 1" />
+        <limit lower="-${PI}" upper="${PI}" effort="${effort}" velocity="${velocity}" />
+    </joint>
+
+
+    <!-- Upper Arm -->
     <link name="upper_arm_link">
         <visual>
             <origin rpy="0 0 0" xyz="0 -0.013 0" />
@@ -42,6 +63,16 @@
         </visual>
     </link>
 
+    <joint name="upper_arm_joint" type="revolute">
+        <parent link="shoulder_link" />
+        <child link="upper_arm_link" />
+        <origin xyz="-0.052 0 0.109" />
+        <axis xyz="0 1 0" />
+        <limit lower="-${PI/2}" upper="${PI/2}" effort="${effort}" velocity="${velocity}" />
+    </joint>
+
+
+    <!-- Elbow -->
     <link name="elbow_link">
         <visual>
             <origin rpy="0 0 0" xyz="0 -0.013 -0.225" />
@@ -52,6 +83,16 @@
         </visual>
     </link>
 
+    <joint name="elbow_joint" type="revolute">
+        <parent link="upper_arm_link" />
+        <child link="elbow_link" />
+        <origin xyz="0 0 0.225" />
+        <axis xyz="0 1 0" />
+        <limit lower="-${PI/2}" upper="${PI/2}" effort="${effort}" velocity="${velocity}" />
+    </joint>
+
+
+    <!-- Forearm -->
     <link name="forearm_link">
         <visual>
             <origin rpy="0 0 0" xyz="0 -0.0042 -0.3257" />
@@ -62,6 +103,16 @@
         </visual>
     </link>
 
+    <joint name="forearm_link" type="revolute">
+        <parent link="elbow_link" />
+        <child link="forearm_link" />
+        <origin xyz="0 -0.0088 0.1007" />
+        <axis xyz="1 0 0" />
+        <limit lower="-${PI/2}" upper="${PI/2}" effort="${effort}" velocity="${velocity}" />
+    </joint>
+
+
+    <!-- Wrist -->
     <link name="wrist_link">
         <visual>
             <origin rpy="0 0 0" xyz="0.284 -0.0042 -0.3257" />
@@ -72,6 +123,16 @@
         </visual>
     </link>
 
+    <joint name="wrist_joint" type="revolute">
+        <parent link="forearm_link" />
+        <child link="wrist_link" />
+        <origin xyz="-0.284 0 0" />
+        <axis xyz="0 1 0" />
+        <limit lower="-${PI/8}" upper="${PI}" effort="${effort}" velocity="${velocity}" />
+    </joint>
+
+
+    <!-- Hand -->
     <link name="hand_link">
         <visual>
             <origin rpy="0 0 0" xyz="0.284 -0.07 -0.3257" />
@@ -82,55 +143,7 @@
         </visual>
     </link>
 
-
-    <!-- Joints -->
-    <joint name="virtual_joint" type="fixed">
-        <parent link="world" />
-        <child link="base_link" />
-        <origin xyz="0 0 0" />
-    </joint>
-
-    <joint name="joint_1" type="revolute">
-        <parent link="base_link" />
-        <child link="shoulder_link" />
-        <origin xyz="0 0 0.07" />
-        <axis xyz="0 0 1" />
-        <limit lower="-${PI}" upper="${PI}" effort="${effort}" velocity="${velocity}" />
-    </joint>
-
-    <joint name="joint_2" type="revolute">
-        <parent link="shoulder_link" />
-        <child link="upper_arm_link" />
-        <origin xyz="-0.052 0 0.109" />
-        <axis xyz="0 1 0" />
-        <limit lower="-${PI/2}" upper="${PI/2}" effort="${effort}" velocity="${velocity}" />
-    </joint>
-
-    <joint name="joint_3" type="revolute">
-        <parent link="upper_arm_link" />
-        <child link="elbow_link" />
-        <origin xyz="0 0 0.225" />
-        <axis xyz="0 1 0" />
-        <limit lower="-${PI/2}" upper="${PI/2}" effort="${effort}" velocity="${velocity}" />
-    </joint>
-
-    <joint name="joint_4" type="revolute">
-        <parent link="elbow_link" />
-        <child link="forearm_link" />
-        <origin xyz="0 -0.0088 0.1007" />
-        <axis xyz="1 0 0" />
-        <limit lower="-${PI/2}" upper="${PI/2}" effort="${effort}" velocity="${velocity}" />
-    </joint>
-
-    <joint name="joint_5" type="revolute">
-        <parent link="forearm_link" />
-        <child link="wrist_link" />
-        <origin xyz="-0.284 0 0" />
-        <axis xyz="0 1 0" />
-        <limit lower="-${PI/8}" upper="${PI}" effort="${effort}" velocity="${velocity}" />
-    </joint>
-
-    <joint name="joint_6" type="revolute">
+    <joint name="hand_joint" type="revolute">
         <parent link="wrist_link" />
         <child link="hand_link" />
         <origin xyz="0 0.0658 0" />
