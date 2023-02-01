@@ -4,6 +4,7 @@
     <!-- Includes -->
     <xacro:include filename="includes/constants.xacro" />
     <xacro:include filename="includes/inertial_macros.xacro" />
+    <xacro:include filename="includes/custom_macros.xacro" />
 
     <!-- Properties -->
     <xacro:property name="effort" value="30" />
@@ -15,15 +16,12 @@
     <link name="world" />
 
     <!-- Base -->
-    <link name="base_link">
-        <visual>
-            <origin rpy="0 0 0" xyz="-0.052 -0.013 0.179" />
-            <geometry>
-                <mesh filename="package://rr1_description/mesh/visual/01_RR1_base.dae"
-                    scale="${model_scale}" />
-            </geometry>
-        </visual>
-    </link>
+    <xacro:rr1_link name="base_link" mesh_file="01_RR1_base">
+        <origin rpy="0 0 0" xyz="-0.052 -0.013 0.179" />
+        <xacro:inertial_cylinder mass="0.2" r="0.073" h="0.075">
+            <origin rpy="0 0 0" xyz="0 0 0.0375" />
+        </xacro:inertial_cylinder>
+    </xacro:rr1_link>
 
     <joint name="virtual_joint" type="fixed">
         <parent link="world" />
@@ -33,15 +31,12 @@
 
 
     <!-- Shoulder -->
-    <link name="shoulder_link">
-        <visual>
-            <origin rpy="0 0 0" xyz="-0.052 -0.013 0.109" />
-            <geometry>
-                <mesh filename="package://rr1_description/mesh/visual/02_RR1_shoulder.dae"
-                    scale="${model_scale}" />
-            </geometry>
-        </visual>
-    </link>
+    <xacro:rr1_link name="shoulder_link" mesh_file="02_RR1_shoulder">
+        <origin rpy="0 0 0" xyz="-0.052 -0.013 0.109" />
+        <xacro:inertial_cylinder mass="0.2" r="0.05" h="0.18">
+            <origin rpy="0 -${PI/8} 0" xyz="-0.04 -0.035 0.0545" />
+        </xacro:inertial_cylinder>
+    </xacro:rr1_link>
 
     <joint name="shoulder_joint" type="revolute">
         <parent link="base_link" />
@@ -53,15 +48,12 @@
 
 
     <!-- Upper Arm -->
-    <link name="upper_arm_link">
-        <visual>
-            <origin rpy="0 0 0" xyz="0 -0.013 0" />
-            <geometry>
-                <mesh filename="package://rr1_description/mesh/visual/03_RR1_upper_arm.dae"
-                    scale="${model_scale}" />
-            </geometry>
-        </visual>
-    </link>
+    <xacro:rr1_link name="upper_arm_link" mesh_file="03_RR1_upper_arm">
+        <origin rpy="0 0 0" xyz="0 -0.013 0" />
+        <xacro:inertial_cylinder mass="0.4" r="0.085" h="0.32">
+            <origin rpy="0 0 0" xyz="0 0.035 0.125" />
+        </xacro:inertial_cylinder>
+    </xacro:rr1_link>
 
     <joint name="upper_arm_joint" type="revolute">
         <parent link="shoulder_link" />
@@ -73,15 +65,12 @@
 
 
     <!-- Elbow -->
-    <link name="elbow_link">
-        <visual>
-            <origin rpy="0 0 0" xyz="0 -0.013 -0.225" />
-            <geometry>
-                <mesh filename="package://rr1_description/mesh/visual/04_RR1_elbow.dae"
-                    scale="${model_scale}" />
-            </geometry>
-        </visual>
-    </link>
+    <xacro:rr1_link name="elbow_link" mesh_file="04_RR1_elbow">
+        <origin rpy="0 0 0" xyz="0 -0.013 -0.225" />
+        <xacro:inertial_box mass="0.3" x="0.174" y="0.055" z="0.19">
+            <origin rpy="0 0 0" xyz="0.032 0 0.04" />
+        </xacro:inertial_box>
+    </xacro:rr1_link>
 
     <joint name="elbow_joint" type="revolute">
         <parent link="upper_arm_link" />
@@ -93,15 +82,12 @@
 
 
     <!-- Forearm -->
-    <link name="forearm_link">
-        <visual>
-            <origin rpy="0 0 0" xyz="0 -0.0042 -0.3257" />
-            <geometry>
-                <mesh filename="package://rr1_description/mesh/visual/05_RR1_forearm.dae"
-                    scale="${model_scale}" />
-            </geometry>
-        </visual>
-    </link>
+    <xacro:rr1_link name="forearm_link" mesh_file="05_RR1_forearm">
+        <origin rpy="0 0 0" xyz="0 -0.0042 -0.3257" />
+        <xacro:inertial_cylinder mass="0.35" r="0.05" h="0.26">
+            <origin rpy="0 -${PI/2} 0" xyz="-0.18 0 0" />
+        </xacro:inertial_cylinder>
+    </xacro:rr1_link>
 
     <joint name="forearm_link" type="revolute">
         <parent link="elbow_link" />
@@ -113,15 +99,12 @@
 
 
     <!-- Wrist -->
-    <link name="wrist_link">
-        <visual>
-            <origin rpy="0 0 0" xyz="0.284 -0.0042 -0.3257" />
-            <geometry>
-                <mesh filename="package://rr1_description/mesh/visual/06_RR1_wrist.dae"
-                    scale="${model_scale}" />
-            </geometry>
-        </visual>
-    </link>
+    <xacro:rr1_link name="wrist_link" mesh_file="06_RR1_wrist">
+        <origin rpy="0 0 0" xyz="0.284 -0.0042 -0.3257" />
+        <xacro:inertial_box mass="0.15" x="0.044" y="0.044" z="0.11">
+            <origin rpy="0 0 0" xyz="0 0.062 0.038" />
+        </xacro:inertial_box>
+    </xacro:rr1_link>
 
     <joint name="wrist_joint" type="revolute">
         <parent link="forearm_link" />
@@ -133,15 +116,12 @@
 
 
     <!-- Hand -->
-    <link name="hand_link">
-        <visual>
-            <origin rpy="0 0 0" xyz="0.284 -0.07 -0.3257" />
-            <geometry>
-                <mesh filename="package://rr1_description/mesh/visual/07_RR1_hand.dae"
-                    scale="${model_scale}" />
-            </geometry>
-        </visual>
-    </link>
+    <xacro:rr1_link name="hand_link" mesh_file="07_RR1_hand">
+        <origin rpy="0 0 0" xyz="0.284 -0.07 -0.3257" />
+        <xacro:inertial_cylinder mass="0.2" r="0.0375" h="0.2">
+            <origin rpy="0 0 0" xyz="0 0 -0.11" />
+        </xacro:inertial_cylinder>
+    </xacro:rr1_link>
 
     <joint name="hand_joint" type="revolute">
         <parent link="wrist_link" />

@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <xacro:macro name="rr1_link" params="name mesh_file *origin *inertial">
+
+        <!-- Create a link with a given name. -->
+        <link name="${name}">
+
+            <!-- Create a visual component using a provided mesh file -->
+            <visual>
+                <xacro:insert_block name="origin" />
+                <geometry>
+                    <mesh filename="package://rr1_description/mesh/visual/${mesh_file}.dae"
+                        scale="${model_scale}" />
+                </geometry>
+            </visual>
+
+            <!-- Create a collision component using a provided mesh file -->
+            <collision>
+                <xacro:insert_block name="origin" />
+                <geometry>
+                    <mesh filename="package://rr1_description/mesh/collision/${mesh_file}.stl"
+                        scale="${model_scale}" />
+                </geometry>
+            </collision>
+
+            <!-- Insert provided inertial block -->
+            <xacro:insert_block name="inertial" />
+        </link>
+
+    </xacro:macro>
+
+</robot>

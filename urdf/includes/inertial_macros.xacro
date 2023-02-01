@@ -4,6 +4,14 @@
     <!-- Specify some standard inertial calculations
     https://en.wikipedia.org/wiki/List_of_moments_of_inertia -->
 
+    <!-- Dummy box inertial kernel for testing purposes -->
+    <xacro:macro name="default_inertial" params="mass">
+        <inertial>
+            <mass value="${mass}" />
+            <inertia ixx="1" ixy="0" ixz="0" iyy="1" iyz="0" izz="1" />
+        </inertial>
+    </xacro:macro>
+
     <!-- Solid sphere of a given radius and mass -->
     <xacro:macro name="inertial_sphere" params="mass radius *origin">
         <inertial>
@@ -15,14 +23,14 @@
         </inertial>
     </xacro:macro>
 
-    <!-- Solid cuboid (box) of width w, height h, depth d, and mass -->
-    <xacro:macro name="inertial_box" params="mass w h d *origin">
+    <!-- Solid cuboid (box) of dimensions x, y, z, and mass -->
+    <xacro:macro name="inertial_box" params="mass x y z *origin">
         <inertial>
             <xacro:insert_block name="origin" />
             <mass value="${mass}" />
-            <inertia ixx="${(1/12) * mass * (h*h+d*d)}" ixy="0.0" ixz="0.0"
-                iyy="${(1/12) * mass * (w*w+h*h)}" iyz="0.0"
-                izz="${(1/12) * mass * (w*w+d*d)}" />
+            <inertia ixx="${(1/12) * mass * (y*y+z*z)}" ixy="0.0" ixz="0.0"
+                iyy="${(1/12) * mass * (x*x+z*z)}" iyz="0.0"
+                izz="${(1/12) * mass * (x*x+y*y)}" />
         </inertial>
     </xacro:macro>
 
