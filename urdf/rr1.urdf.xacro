@@ -5,10 +5,13 @@
     <xacro:include filename="includes/constants.xacro" />
     <xacro:include filename="includes/inertial_macros.xacro" />
     <xacro:include filename="includes/custom_macros.xacro" />
+    <xacro:include filename="includes/ros2_control.xacro" />
 
     <!-- Properties -->
     <xacro:property name="effort" value="30" />
     <xacro:property name="velocity" value="10" />
+    <xacro:property name="damping" value="10" />
+    <xacro:property name="friction" value="10.0" />
 
     <xacro:property name="model_scale" value="0.001 0.001 0.001" />
 
@@ -44,6 +47,7 @@
         <origin xyz="0 0 0.07" />
         <axis xyz="0 0 1" />
         <limit lower="-${PI}" upper="${PI}" effort="${effort}" velocity="${velocity}" />
+        <dynamics damping="${damping}" friction="${friction}" />
     </joint>
 
 
@@ -61,6 +65,7 @@
         <origin xyz="-0.052 0 0.109" />
         <axis xyz="0 1 0" />
         <limit lower="-${PI/2}" upper="${PI/2}" effort="${effort}" velocity="${velocity}" />
+        <dynamics damping="${damping}" friction="${friction}" />
     </joint>
 
 
@@ -78,6 +83,7 @@
         <origin xyz="0 0 0.225" />
         <axis xyz="0 1 0" />
         <limit lower="-${PI/2}" upper="${PI/2}" effort="${effort}" velocity="${velocity}" />
+        <dynamics damping="${damping}" friction="${friction}" />
     </joint>
 
 
@@ -89,12 +95,13 @@
         </xacro:inertial_cylinder>
     </xacro:rr1_link>
 
-    <joint name="forearm_link" type="revolute">
+    <joint name="forearm_joint" type="revolute">
         <parent link="elbow_link" />
         <child link="forearm_link" />
         <origin xyz="0 -0.0088 0.1007" />
         <axis xyz="1 0 0" />
         <limit lower="-${PI/2}" upper="${PI/2}" effort="${effort}" velocity="${velocity}" />
+        <dynamics damping="${damping}" friction="${friction}" />
     </joint>
 
 
@@ -112,6 +119,7 @@
         <origin xyz="-0.284 0 0" />
         <axis xyz="0 1 0" />
         <limit lower="-${PI/8}" upper="${PI}" effort="${effort}" velocity="${velocity}" />
+        <dynamics damping="${damping}" friction="${friction}" />
     </joint>
 
 
@@ -129,6 +137,7 @@
         <origin xyz="0 0.0658 0" />
         <axis xyz="0 0 1" />
         <limit lower="-${PI/2}" upper="${PI/2}" effort="${effort}" velocity="${velocity}" />
+        <dynamics damping="${damping}" friction="${friction}" />
     </joint>
 
 </robot>
