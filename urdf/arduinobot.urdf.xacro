@@ -239,14 +239,14 @@
     <xacro:default_transmission id="4" />
 
     <gazebo>
-        <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+        <plugin name="gazebo_ros2_control" filename="libgazebo_ros2_control.so">
             <robotNamespace>/arduinobot</robotNamespace>
-            <robotSimType>gazebo_ros_control/DefaultRobotHardwareSim</robotSimType>
+            <robot_sim_type>gazebo_ros2_control/DefaultRobotHWSim</robot_sim_type>
             <legacyModeNS>true</legacyModeNS>
         </plugin>
 
         <plugin name="joint_5_mimic_joint_4"
-            filename="libroboticsgroup_gazebo_mimic_joint_plugin.so">
+            filename="libroboticsgroup_upatras_gazebo_mimic_joint_plugin.so">
             <joint>joint_4</joint>
             <mimicJoint>joint_5</mimicJoint>
             <multiplier>-1.0</multiplier>
@@ -255,4 +255,10 @@
             <robotNamespace>/arduinobot</robotNamespace>
         </plugin>
     </gazebo>
+
+    <ros2_control name="arduinobot" type="system">
+        <hardware>
+            <plugin>test_system</plugin>
+        </hardware>
+    </ros2_control>
 </robot>
