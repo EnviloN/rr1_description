@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.8)
+cmake_minimum_required(VERSION 3.0.2)
 project(rr1_description)
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
@@ -6,7 +6,7 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
 endif()
 
 # find dependencies
-find_package(ament_cmake REQUIRED)
+find_package(catkin REQUIRED)
 
 install(DIRECTORY
   urdf
@@ -14,5 +14,3 @@ install(DIRECTORY
   config
   DESTINATION share/${PROJECT_NAME}
 )
-
-ament_package()
