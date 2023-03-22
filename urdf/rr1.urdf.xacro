@@ -19,9 +19,9 @@
     <link name="world" />
 
     <!-- Base -->
-    <xacro:rr1_link name="base_link" mesh_file="01_RR1_base">
+    <xacro:rr1_link name="base_link" mesh_file="01_RR1_extended_base">
         <origin rpy="0 0 0" xyz="-0.052 -0.013 0.179" />
-        <xacro:inertial_cylinder mass="0.2" r="0.073" h="0.075">
+        <xacro:inertial_cylinder mass="0.5" r="0.073" h="0.075">
             <origin rpy="0 0 0" xyz="0 0 0.0375" />
         </xacro:inertial_cylinder>
     </xacro:rr1_link>
