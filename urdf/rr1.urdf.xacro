@@ -124,10 +124,10 @@
 
 
     <!-- Hand -->
-    <xacro:rr1_link name="hand_link" mesh_file="07_RR1_hand">
+    <xacro:rr1_link name="hand_link" mesh_file="07_RR1_hand_no_grip">
         <origin rpy="0 0 0" xyz="0.284 -0.07 -0.3257" />
-        <xacro:inertial_cylinder mass="0.2" r="0.0375" h="0.2">
-            <origin rpy="0 0 0" xyz="0 0 -0.11" />
+        <xacro:inertial_cylinder mass="0.2" r="0.0375" h="0.14">
+            <origin rpy="0 0 0" xyz="0 0 -0.08" />
         </xacro:inertial_cylinder>
     </xacro:rr1_link>
 
@@ -138,6 +138,48 @@
         <axis xyz="0 0 1" />
         <limit lower="-${PI/2}" upper="${PI/2}" effort="${effort}" velocity="${velocity}" />
         <dynamics damping="${damping}" friction="${friction}" />
+    </joint>
+
+    <!-- Gripper -->
+    <xacro:rr1_link name="finger_link" mesh_file="08_RR1_grip">
+        <origin rpy="0 0 0" xyz="0.274 -0.07 -0.1757" />
+        <xacro:inertial_box mass="0.02" x="0.01" y="0.02" z="0.06">
+            <origin rpy="0 0 0" xyz="0.01 0 -0.05" />
+        </xacro:inertial_box>
+    </xacro:rr1_link>
+
+    <joint name="finger_joint" type="revolute">
+        <parent link="hand_link" />
+        <child link="finger_link" />
+        <origin xyz="0.01 0 -0.15" />
+        <axis xyz="0 -1 0" />
+        <limit lower="-0.04" upper="${PI/4}" effort="${effort}" velocity="${velocity}" />
+        <dynamics damping="${damping}" friction="${friction}" />
+    </joint>
+
+    <xacro:rr1_link name="opposite_finger_link" mesh_file="08_RR1_grip_opposite">
+        <origin rpy="0 0 0" xyz="0.294 -0.07 -0.1757" />
+        <xacro:inertial_box mass="0.02" x="0.01" y="0.02" z="0.06">
+            <origin rpy="0 0 0" xyz="-0.01 0 -0.05" />
+        </xacro:inertial_box>
+    </xacro:rr1_link>
+
+    <joint name="opposite_finger_joint" type="revolute">
+        <parent link="hand_link" />
+        <child link="opposite_finger_link" />
+        <origin xyz="-0.01 0 -0.15" />
+        <axis xyz="0 1 0" />
+        <mimic joint="finger_joint" />
+        <limit lower="-0.04" upper="${PI/4}" effort="${effort}" velocity="${velocity}" />
+        <dynamics damping="${damping}" friction="${friction}" />
+    </joint>
+
+    <link name="tool" />
+
+    <joint name="tool_joint" type="fixed">
+        <parent link="hand_link" />
+        <child link="tool" />
+        <origin xyz="0 0 -0.195" />
     </joint>
 
 </robot>
