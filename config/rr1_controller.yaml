@@ -25,6 +25,7 @@ forward_position_controller:
       - wrist_joint
       - hand_joint
       - finger_joint
+      - opposite_finger_joint
     interface_name: position
 
 
@@ -38,6 +39,7 @@ joint_trajectory_controller:
       - wrist_joint
       - hand_joint
       - finger_joint
+      - opposite_finger_joint
 
     command_interfaces:
       - position
