@@ -6,6 +6,13 @@
         <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
             <robot_sim_type>gazebo_ros2_control/GazeboSystem</robot_sim_type>
             <parameters>$(find rr1_description)/config/rr1_controller.yaml</parameters>
+            <!-- <parameters>$(find rr1_description)/config/$(arg ns)_controller.yaml</parameters> -->
+            <xacro:if value="$(arg use_ns)">
+                <ros>
+                    <namespace>/$(arg ns)</namespace>
+                    <remapping>/tf:=/$(arg ns)/tf</remapping>
+                </ros>
+            </xacro:if>
         </plugin>
     </gazebo>
 
