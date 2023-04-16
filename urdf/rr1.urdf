@@ -4,6 +4,7 @@
 <!-- |    EDITING THIS FILE BY HAND IS NOT RECOMMENDED                                 | -->
 <!-- =================================================================================== -->
 <robot name="rr1">
+  <!-- Namespace -->
   <!-- Specify some standard inertial calculations
     https://en.wikipedia.org/wiki/List_of_moments_of_inertia -->
   <!-- Gazebo's ros2_control plugin -->
@@ -11,6 +12,10 @@
     <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
       <robot_sim_type>gazebo_ros2_control/GazeboSystem</robot_sim_type>
       <parameters>/home/envilon/dev_ws/install/rr1_description/share/rr1_description/config/rr1_controller.yaml</parameters>
+      <ros>
+        <namespace>/rr1</namespace>
+        <remapping>/tf:=/rr1/tf</remapping>
+      </ros>
     </plugin>
   </gazebo>
   <ros2_control name="GazeboSystem" type="system">
@@ -22,71 +27,120 @@
         <param name="min">-3.14</param>
         <param name="max">3.14</param>
       </command_interface>
-      <state_interface name="position"/>
-      <state_interface name="velocity"/>
-      <state_interface name="effort"/>
+      <state_interface name="position">
+        <param name="initial_value">0.0</param>
+      </state_interface>
+      <state_interface name="velocity">
+        <param name="initial_value">0.0</param>
+      </state_interface>
+      <state_interface name="effort">
+        <param name="initial_value">0.0</param>
+      </state_interface>
     </joint>
     <joint name="upper_arm_joint">
       <command_interface name="position">
         <param name="min">-3.14</param>
         <param name="max">3.14</param>
       </command_interface>
-      <state_interface name="position"/>
-      <state_interface name="velocity"/>
-      <state_interface name="effort"/>
+      <state_interface name="position">
+        <param name="initial_value">0.0</param>
+      </state_interface>
+      <state_interface name="velocity">
+        <param name="initial_value">0.0</param>
+      </state_interface>
+      <state_interface name="effort">
+        <param name="initial_value">0.0</param>
+      </state_interface>
     </joint>
     <joint name="elbow_joint">
       <command_interface name="position">
         <param name="min">-3.14</param>
         <param name="max">3.14</param>
       </command_interface>
-      <state_interface name="position"/>
-      <state_interface name="velocity"/>
-      <state_interface name="effort"/>
+      <state_interface name="position">
+        <param name="initial_value">0.0</param>
+      </state_interface>
+      <state_interface name="velocity">
+        <param name="initial_value">0.0</param>
+      </state_interface>
+      <state_interface name="effort">
+        <param name="initial_value">0.0</param>
+      </state_interface>
     </joint>
     <joint name="forearm_joint">
       <command_interface name="position">
         <param name="min">-3.14</param>
         <param name="max">3.14</param>
       </command_interface>
-      <state_interface name="position"/>
-      <state_interface name="velocity"/>
-      <state_interface name="effort"/>
+      <state_interface name="position">
+        <param name="initial_value">0.0</param>
+      </state_interface>
+      <state_interface name="velocity">
+        <param name="initial_value">0.0</param>
+      </state_interface>
+      <state_interface name="effort">
+        <param name="initial_value">0.0</param>
+      </state_interface>
     </joint>
     <joint name="wrist_joint">
       <command_interface name="position">
         <param name="min">-3.14</param>
         <param name="max">3.14</param>
       </command_interface>
-      <state_interface name="position"/>
-      <state_interface name="velocity"/>
-      <state_interface name="effort"/>
+      <state_interface name="position">
+        <param name="initial_value">0.0</param>
+      </state_interface>
+      <state_interface name="velocity">
+        <param name="initial_value">0.0</param>
+      </state_interface>
+      <state_interface name="effort">
+        <param name="initial_value">0.0</param>
+      </state_interface>
     </joint>
     <joint name="hand_joint">
       <command_interface name="position">
         <param name="min">-3.14</param>
         <param name="max">3.14</param>
       </command_interface>
-      <state_interface name="position"/>
-      <state_interface name="velocity"/>
-      <state_interface name="effort"/>
+      <state_interface name="position">
+        <param name="initial_value">0.0</param>
+      </state_interface>
+      <state_interface name="velocity">
+        <param name="initial_value">0.0</param>
+      </state_interface>
+      <state_interface name="effort">
+        <param name="initial_value">0.0</param>
+      </state_interface>
     </joint>
     <joint name="finger_joint">
       <command_interface name="position">
         <param name="min">-0.04</param>
         <param name="max">0.785</param>
       </command_interface>
-      <state_interface name="position"/>
-      <state_interface name="velocity"/>
-      <state_interface name="effort"/>
+      <state_interface name="position">
+        <param name="initial_value">0.0</param>
+      </state_interface>
+      <state_interface name="velocity">
+        <param name="initial_value">0.0</param>
+      </state_interface>
+      <state_interface name="effort">
+        <param name="initial_value">0.0</param>
+      </state_interface>
     </joint>
     <joint name="opposite_finger_joint">
-      <param name="mimic">finger_joint</param>
-      <param name="multiplier">-1</param>
-      <command_interface name="position"/>
-      <state_interface name="position"/>
-      <state_interface name="velocity"/>
-      <state_interface name="effort"/>
+      <command_interface name="position">
+        <param name="min">-0.04</param>
+        <param name="max">0.785</param>
+      </command_interface>
+      <state_interface name="position">
+        <param name="initial_value">0.0</param>
+      </state_interface>
+      <state_interface name="velocity">
+        <param name="initial_value">0.0</param>
+      </state_interface>
+      <state_interface name="effort">
+        <param name="initial_value">0.0</param>
+      </state_interface>
     </joint>
   </ros2_control>
   <!-- We need a world link because we want the base link of the robot to be anchored to it -->

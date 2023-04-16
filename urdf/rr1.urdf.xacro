@@ -1,7 +1,6 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="rr1">
     <!-- Arguments -->
-    <xacro:arg name="use_ns" default="false" />  <!-- Namespace -->
     <xacro:arg name="ns" default="rr1" />  <!-- Namespace -->
 
     <!-- Includes -->
