@@ -11,10 +11,11 @@
 
     <!-- Properties -->
     <xacro:property name="effort" value="30" />
-    <xacro:property name="velocity" value="10" />
+    <xacro:property name="rpm" value="75" /> <!-- Including transmission-->
     <xacro:property name="damping" value="10" />
     <xacro:property name="friction" value="10.0" />
 
+    <xacro:property name="velocity" value="${rpm * RPM_TO_RAD_S}" />
     <xacro:property name="model_scale" value="0.001 0.001 0.001" />
 
     <!-- We need a world link because we want the base link of the robot to be anchored to it -->
@@ -23,7 +24,7 @@
     <!-- Base -->
     <xacro:rr1_link name="base_link" mesh_file="01_RR1_extended_base">
         <origin rpy="0 0 0" xyz="-0.052 -0.013 0.179" />
-        <xacro:inertial_box mass="0.5" x="0.36" y="0.15" z="0.09">
+        <xacro:inertial_box mass="4.0" x="0.36" y="0.15" z="0.09">
             <origin rpy="0 0 0" xyz="0.105 0 0.0375" />
         </xacro:inertial_box>
     </xacro:rr1_link>
@@ -37,7 +38,7 @@
     <!-- Shoulder -->
     <xacro:rr1_link name="shoulder_link" mesh_file="02_RR1_shoulder">
         <origin rpy="0 0 0" xyz="-0.052 -0.013 0.109" />
-        <xacro:inertial_cylinder mass="0.2" r="0.05" h="0.18">
+        <xacro:inertial_cylinder mass="2.5" r="0.05" h="0.18">
             <origin rpy="0 -${PI/8} 0" xyz="-0.04 -0.035 0.0545" />
         </xacro:inertial_cylinder>
     </xacro:rr1_link>
@@ -47,7 +48,7 @@
         <child link="shoulder_link" />
         <origin xyz="0 0 0.07" />
         <axis xyz="0 0 1" />
-        <limit lower="-${PI}" upper="${PI}" effort="${effort}" velocity="${velocity}" />
+        <limit lower="-${PI*3/4}" upper="${PI*3/4}" effort="${effort}" velocity="${velocity}" />
         <dynamics damping="${damping}" friction="${friction}" />
     </joint>
 
@@ -55,7 +56,7 @@
     <!-- Upper Arm -->
     <xacro:rr1_link name="upper_arm_link" mesh_file="03_RR1_upper_arm">
         <origin rpy="0 0 0" xyz="0 -0.013 0" />
-        <xacro:inertial_cylinder mass="0.4" r="0.085" h="0.32">
+        <xacro:inertial_cylinder mass="2.5" r="0.085" h="0.32">
             <origin rpy="0 0 0" xyz="0 0.035 0.125" />
         </xacro:inertial_cylinder>
     </xacro:rr1_link>
@@ -65,7 +66,7 @@
         <child link="upper_arm_link" />
         <origin xyz="-0.052 0 0.109" />
         <axis xyz="0 1 0" />
-        <limit lower="-${PI/2}" upper="${PI/2}" effort="${effort}" velocity="${velocity}" />
+        <limit lower="-${PI/8}" upper="${PI/8}" effort="${effort}" velocity="${velocity}" />
         <dynamics damping="${damping}" friction="${friction}" />
     </joint>
 
@@ -73,7 +74,7 @@
     <!-- Elbow -->
     <xacro:rr1_link name="elbow_link" mesh_file="04_RR1_elbow">
         <origin rpy="0 0 0" xyz="0 -0.013 -0.225" />
-        <xacro:inertial_box mass="0.3" x="0.174" y="0.055" z="0.19">
+        <xacro:inertial_box mass="1.75" x="0.174" y="0.055" z="0.19">
             <origin rpy="0 0 0" xyz="0.032 0 0.04" />
         </xacro:inertial_box>
     </xacro:rr1_link>
@@ -91,7 +92,7 @@
     <!-- Forearm -->
     <xacro:rr1_link name="forearm_link" mesh_file="05_RR1_forearm">
         <origin rpy="0 0 0" xyz="0 -0.0042 -0.3257" />
-        <xacro:inertial_cylinder mass="0.35" r="0.05" h="0.26">
+        <xacro:inertial_cylinder mass="1.5" r="0.05" h="0.26">
             <origin rpy="0 -${PI/2} 0" xyz="-0.18 0 0" />
         </xacro:inertial_cylinder>
     </xacro:rr1_link>
@@ -101,7 +102,7 @@
         <child link="forearm_link" />
         <origin xyz="0 -0.0088 0.1007" />
         <axis xyz="1 0 0" />
-        <limit lower="-${PI/2}" upper="${PI/2}" effort="${effort}" velocity="${velocity}" />
+        <limit lower="-${PI*3/4}" upper="${PI*3/4}" effort="${effort}" velocity="${velocity}" />
         <dynamics damping="${damping}" friction="${friction}" />
     </joint>
 
@@ -109,7 +110,7 @@
     <!-- Wrist -->
     <xacro:rr1_link name="wrist_link" mesh_file="06_RR1_wrist">
         <origin rpy="0 0 0" xyz="0.284 -0.0042 -0.3257" />
-        <xacro:inertial_box mass="0.15" x="0.044" y="0.044" z="0.11">
+        <xacro:inertial_box mass="1.0" x="0.044" y="0.044" z="0.11">
             <origin rpy="0 0 0" xyz="0 0.062 0.038" />
         </xacro:inertial_box>
     </xacro:rr1_link>
@@ -119,7 +120,7 @@
         <child link="wrist_link" />
         <origin xyz="-0.284 0 0" />
         <axis xyz="0 1 0" />
-        <limit lower="-${PI/8}" upper="${PI}" effort="${effort}" velocity="${velocity}" />
+        <limit lower="0" upper="${PI}" effort="${effort}" velocity="${velocity}" />
         <dynamics damping="${damping}" friction="${friction}" />
     </joint>
 
@@ -127,7 +128,7 @@
     <!-- Hand -->
     <xacro:rr1_link name="hand_link" mesh_file="07_RR1_hand_no_grip">
         <origin rpy="0 0 0" xyz="0.284 -0.07 -0.3257" />
-        <xacro:inertial_cylinder mass="0.2" r="0.0375" h="0.14">
+        <xacro:inertial_cylinder mass="0.5" r="0.0375" h="0.14">
             <origin rpy="0 0 0" xyz="0 0 -0.08" />
         </xacro:inertial_cylinder>
     </xacro:rr1_link>
@@ -137,14 +138,14 @@
         <child link="hand_link" />
         <origin xyz="0 0.0658 0" />
         <axis xyz="0 0 1" />
-        <limit lower="-${PI/2}" upper="${PI/2}" effort="${effort}" velocity="${velocity}" />
+        <limit lower="-${PI*3/4}" upper="${PI*3/4}" effort="${effort}" velocity="${velocity}" />
         <dynamics damping="${damping}" friction="${friction}" />
     </joint>
 
     <!-- Gripper -->
     <xacro:rr1_link name="finger_link" mesh_file="08_RR1_grip">
         <origin rpy="0 0 0" xyz="0.274 -0.07 -0.1757" />
-        <xacro:inertial_box mass="0.02" x="0.01" y="0.02" z="0.06">
+        <xacro:inertial_box mass="0.25" x="0.01" y="0.02" z="0.06">
             <origin rpy="0 0 0" xyz="0.01 0 -0.05" />
         </xacro:inertial_box>
     </xacro:rr1_link>
@@ -154,13 +155,13 @@
         <child link="finger_link" />
         <origin xyz="0.01 0 -0.15" />
         <axis xyz="0 -1 0" />
-        <limit lower="-0.04" upper="${PI/4}" effort="${effort}" velocity="${velocity}" />
+        <limit lower="0" upper="${PI*3/8}" effort="${effort}" velocity="${velocity}" />
         <dynamics damping="${damping}" friction="${friction}" />
     </joint>
 
     <xacro:rr1_link name="opposite_finger_link" mesh_file="08_RR1_grip_opposite">
         <origin rpy="0 0 0" xyz="0.294 -0.07 -0.1757" />
-        <xacro:inertial_box mass="0.02" x="0.01" y="0.02" z="0.06">
+        <xacro:inertial_box mass="0.25" x="0.01" y="0.02" z="0.06">
             <origin rpy="0 0 0" xyz="-0.01 0 -0.05" />
         </xacro:inertial_box>
     </xacro:rr1_link>
@@ -171,7 +172,7 @@
         <origin xyz="-0.01 0 -0.15" />
         <axis xyz="0 1 0" />
         <mimic joint="finger_joint" />
-        <limit lower="-0.04" upper="${PI/4}" effort="${effort}" velocity="${velocity}" />
+        <limit lower="0" upper="${PI*3/8 }" effort="${effort}" velocity="${velocity}" />
         <dynamics damping="${damping}" friction="${friction}" />
     </joint>
 

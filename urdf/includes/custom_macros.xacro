@@ -30,4 +30,24 @@
 
     </xacro:macro>
 
+    <xacro:macro name="ros2_control_joint" params="name min_lim max_lim">
+
+        <joint name="${name}">
+            <command_interface name="position">
+                <param name="min">${min_lim}</param>
+                <param name="max">${max_lim}</param>
+            </command_interface>
+            <state_interface name="position">
+                <param name="initial_value">0.0</param>
+            </state_interface>
+            <state_interface name="velocity">
+                <param name="initial_value">0.0</param>
+            </state_interface>
+            <state_interface name="effort">
+                <param name="initial_value">0.0</param>
+            </state_interface>
+        </joint>
+
+    </xacro:macro>
+
 </robot>

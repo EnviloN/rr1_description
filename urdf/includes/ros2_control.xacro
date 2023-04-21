@@ -18,132 +18,29 @@
             <plugin>gazebo_ros2_control/GazeboSystem</plugin>
         </hardware>
 
-        <joint name="shoulder_joint">
-            <command_interface name="position">
-                <param name="min">-3.14</param>
-                <param name="max">3.14</param>
-            </command_interface>
-            <state_interface name="position">
-                <param name="initial_value">0.0</param>
-            </state_interface>
-            <state_interface name="velocity">
-                <param name="initial_value">0.0</param>
-            </state_interface>
-            <state_interface name="effort">
-                <param name="initial_value">0.0</param>
-            </state_interface>
-        </joint>
+        <xacro:ros2_control_joint name="shoulder_joint"
+            min_lim="-${PI*3/4}" max_lim="${PI*3/4}" />
 
-        <joint name="upper_arm_joint">
-            <command_interface name="position">
-                <param name="min">-3.14</param>
-                <param name="max">3.14</param>
-            </command_interface>
-            <state_interface name="position">
-                <param name="initial_value">0.0</param>
-            </state_interface>
-            <state_interface name="velocity">
-                <param name="initial_value">0.0</param>
-            </state_interface>
-            <state_interface name="effort">
-                <param name="initial_value">0.0</param>
-            </state_interface>
-        </joint>
+        <xacro:ros2_control_joint name="upper_arm_joint"
+            min_lim="-${PI/8}" max_lim="${PI/8}" />
 
-        <joint name="elbow_joint">
-            <command_interface name="position">
-                <param name="min">-3.14</param>
-                <param name="max">3.14</param>
-            </command_interface>
-            <state_interface name="position">
-                <param name="initial_value">0.0</param>
-            </state_interface>
-            <state_interface name="velocity">
-                <param name="initial_value">0.0</param>
-            </state_interface>
-            <state_interface name="effort">
-                <param name="initial_value">0.0</param>
-            </state_interface>
-        </joint>
+        <xacro:ros2_control_joint name="elbow_joint"
+            min_lim="-${PI/2}" max_lim="${PI/2}" />
 
-        <joint name="forearm_joint">
-            <command_interface name="position">
-                <param name="min">-3.14</param>
-                <param name="max">3.14</param>
-            </command_interface>
-            <state_interface name="position">
-                <param name="initial_value">0.0</param>
-            </state_interface>
-            <state_interface name="velocity">
-                <param name="initial_value">0.0</param>
-            </state_interface>
-            <state_interface name="effort">
-                <param name="initial_value">0.0</param>
-            </state_interface>
-        </joint>
+        <xacro:ros2_control_joint name="forearm_joint"
+            min_lim="-${PI*3/4}" max_lim="${PI*3/4}" />
 
-        <joint name="wrist_joint">
-            <command_interface name="position">
-                <param name="min">-3.14</param>
-                <param name="max">3.14</param>
-            </command_interface>
-            <state_interface name="position">
-                <param name="initial_value">0.0</param>
-            </state_interface>
-            <state_interface name="velocity">
-                <param name="initial_value">0.0</param>
-            </state_interface>
-            <state_interface name="effort">
-                <param name="initial_value">0.0</param>
-            </state_interface>
-        </joint>
+        <xacro:ros2_control_joint name="wrist_joint"
+            min_lim="0" max_lim="${PI}" />
 
-        <joint name="hand_joint">
-            <command_interface name="position">
-                <param name="min">-3.14</param>
-                <param name="max">3.14</param>
-            </command_interface>
-            <state_interface name="position">
-                <param name="initial_value">0.0</param>
-            </state_interface>
-            <state_interface name="velocity">
-                <param name="initial_value">0.0</param>
-            </state_interface>
-            <state_interface name="effort">
-                <param name="initial_value">0.0</param>
-            </state_interface>
-        </joint>
+        <xacro:ros2_control_joint name="hand_joint"
+            min_lim="-${PI*3/4}" max_lim="${PI*3/4}" />
 
-        <joint name="finger_joint">
-            <command_interface name="position">
-                <param name="min">-0.04</param>
-                <param name="max">0.785</param>
-            </command_interface>
-            <state_interface name="position">
-                <param name="initial_value">0.0</param>
-            </state_interface>
-            <state_interface name="velocity">
-                <param name="initial_value">0.0</param>
-            </state_interface>
-            <state_interface name="effort">
-                <param name="initial_value">0.0</param>
-            </state_interface>
-        </joint>
+        <xacro:ros2_control_joint name="finger_joint"
+            min_lim="0" max_lim="${PI*3/8}" />
 
-        <joint name="opposite_finger_joint">
-            <command_interface name="position">
-                <param name="min">-0.04</param>
-                <param name="max">0.785</param>
-            </command_interface>
-            <state_interface name="position">
-                <param name="initial_value">0.0</param>
-            </state_interface>
-            <state_interface name="velocity">
-                <param name="initial_value">0.0</param>
-            </state_interface>
-            <state_interface name="effort">
-                <param name="initial_value">0.0</param>
-            </state_interface>
-        </joint>
+        <xacro:ros2_control_joint name="opposite_finger_joint"
+            min_lim="0" max_lim="${PI*3/8}" />
+
     </ros2_control>
 </robot>

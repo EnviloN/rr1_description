@@ -24,8 +24,8 @@
     </hardware>
     <joint name="shoulder_joint">
       <command_interface name="position">
-        <param name="min">-3.14</param>
-        <param name="max">3.14</param>
+        <param name="min">-2.3561944901925003</param>
+        <param name="max">2.3561944901925003</param>
       </command_interface>
       <state_interface name="position">
         <param name="initial_value">0.0</param>
@@ -39,8 +39,8 @@
     </joint>
     <joint name="upper_arm_joint">
       <command_interface name="position">
-        <param name="min">-3.14</param>
-        <param name="max">3.14</param>
+        <param name="min">-0.39269908169875</param>
+        <param name="max">0.39269908169875</param>
       </command_interface>
       <state_interface name="position">
         <param name="initial_value">0.0</param>
@@ -54,8 +54,8 @@
     </joint>
     <joint name="elbow_joint">
       <command_interface name="position">
-        <param name="min">-3.14</param>
-        <param name="max">3.14</param>
+        <param name="min">-1.570796326795</param>
+        <param name="max">1.570796326795</param>
       </command_interface>
       <state_interface name="position">
         <param name="initial_value">0.0</param>
@@ -69,8 +69,8 @@
     </joint>
     <joint name="forearm_joint">
       <command_interface name="position">
-        <param name="min">-3.14</param>
-        <param name="max">3.14</param>
+        <param name="min">-2.3561944901925003</param>
+        <param name="max">2.3561944901925003</param>
       </command_interface>
       <state_interface name="position">
         <param name="initial_value">0.0</param>
@@ -84,8 +84,8 @@
     </joint>
     <joint name="wrist_joint">
       <command_interface name="position">
-        <param name="min">-3.14</param>
-        <param name="max">3.14</param>
+        <param name="min">0</param>
+        <param name="max">3.14159265359</param>
       </command_interface>
       <state_interface name="position">
         <param name="initial_value">0.0</param>
@@ -99,8 +99,8 @@
     </joint>
     <joint name="hand_joint">
       <command_interface name="position">
-        <param name="min">-3.14</param>
-        <param name="max">3.14</param>
+        <param name="min">-2.3561944901925003</param>
+        <param name="max">2.3561944901925003</param>
       </command_interface>
       <state_interface name="position">
         <param name="initial_value">0.0</param>
@@ -114,8 +114,8 @@
     </joint>
     <joint name="finger_joint">
       <command_interface name="position">
-        <param name="min">-0.04</param>
-        <param name="max">0.785</param>
+        <param name="min">0</param>
+        <param name="max">1.1780972450962501</param>
       </command_interface>
       <state_interface name="position">
         <param name="initial_value">0.0</param>
@@ -129,8 +129,8 @@
     </joint>
     <joint name="opposite_finger_joint">
       <command_interface name="position">
-        <param name="min">-0.04</param>
-        <param name="max">0.785</param>
+        <param name="min">0</param>
+        <param name="max">1.1780972450962501</param>
       </command_interface>
       <state_interface name="position">
         <param name="initial_value">0.0</param>
@@ -163,9 +163,9 @@
     </collision>
     <!-- Insert provided inertial block -->
     <inertial>
-      <origin rpy="0 0 0" xyz="0 0 0.0375"/>
-      <mass value="0.5"/>
-      <inertia ixx="0.0009004999999999999" ixy="0.0" ixz="0.0" iyy="0.0009004999999999999" iyz="0.0" izz="0.0013322499999999999"/>
+      <origin rpy="0 0 0" xyz="0.105 0 0.0375"/>
+      <mass value="4.0"/>
+      <inertia ixx="0.010199999999999999" ixy="0.0" ixz="0.0" iyy="0.045899999999999996" iyz="0.0" izz="0.050699999999999995"/>
     </inertial>
   </link>
   <joint name="virtual_joint" type="fixed">
@@ -192,8 +192,8 @@
     <!-- Insert provided inertial block -->
     <inertial>
       <origin rpy="0 -0.39269908169875 0" xyz="-0.04 -0.035 0.0545"/>
-      <mass value="0.2"/>
-      <inertia ixx="0.000665" ixy="0.0" ixz="0.0" iyy="0.000665" iyz="0.0" izz="0.00025000000000000006"/>
+      <mass value="2.5"/>
+      <inertia ixx="0.008312499999999999" ixy="0.0" ixz="0.0" iyy="0.008312499999999999" iyz="0.0" izz="0.003125"/>
     </inertial>
   </link>
   <joint name="shoulder_joint" type="revolute">
@@ -201,7 +201,7 @@
     <child link="shoulder_link"/>
     <origin xyz="0 0 0.07"/>
     <axis xyz="0 0 1"/>
-    <limit effort="30" lower="-3.14159265359" upper="3.14159265359" velocity="10"/>
+    <limit effort="30" lower="-2.3561944901925003" upper="2.3561944901925003" velocity="7.853985"/>
     <dynamics damping="10" friction="10.0"/>
   </joint>
   <!-- Create a link with a given name. -->
@@ -223,8 +223,8 @@
     <!-- Insert provided inertial block -->
     <inertial>
       <origin rpy="0 0 0" xyz="0 0.035 0.125"/>
-      <mass value="0.4"/>
-      <inertia ixx="0.004135833333333333" ixy="0.0" ixz="0.0" iyy="0.004135833333333333" iyz="0.0" izz="0.001445"/>
+      <mass value="2.5"/>
+      <inertia ixx="0.02584895833333333" ixy="0.0" ixz="0.0" iyy="0.02584895833333333" iyz="0.0" izz="0.009031250000000001"/>
     </inertial>
   </link>
   <joint name="upper_arm_joint" type="revolute">
@@ -232,7 +232,7 @@
     <child link="upper_arm_link"/>
     <origin xyz="-0.052 0 0.109"/>
     <axis xyz="0 1 0"/>
-    <limit effort="30" lower="-1.570796326795" upper="1.570796326795" velocity="10"/>
+    <limit effort="30" lower="-0.39269908169875" upper="0.39269908169875" velocity="7.853985"/>
     <dynamics damping="10" friction="10.0"/>
   </joint>
   <!-- Create a link with a given name. -->
@@ -254,8 +254,8 @@
     <!-- Insert provided inertial block -->
     <inertial>
       <origin rpy="0 0 0" xyz="0.032 0 0.04"/>
-      <mass value="0.3"/>
-      <inertia ixx="0.0009781249999999998" ixy="0.0" ixz="0.0" iyy="0.0016593999999999997" iyz="0.0" izz="0.0008325249999999999"/>
+      <mass value="1.75"/>
+      <inertia ixx="0.005705729166666666" ixy="0.0" ixz="0.0" iyy="0.00967983333333333" iyz="0.0" izz="0.004856395833333332"/>
     </inertial>
   </link>
   <joint name="elbow_joint" type="revolute">
@@ -263,7 +263,7 @@
     <child link="elbow_link"/>
     <origin xyz="0 0 0.225"/>
     <axis xyz="0 1 0"/>
-    <limit effort="30" lower="-1.570796326795" upper="1.570796326795" velocity="10"/>
+    <limit effort="30" lower="-1.570796326795" upper="1.570796326795" velocity="7.853985"/>
     <dynamics damping="10" friction="10.0"/>
   </joint>
   <!-- Create a link with a given name. -->
@@ -285,8 +285,8 @@
     <!-- Insert provided inertial block -->
     <inertial>
       <origin rpy="0 -1.570796326795 0" xyz="-0.18 0 0"/>
-      <mass value="0.35"/>
-      <inertia ixx="0.002190416666666667" ixy="0.0" ixz="0.0" iyy="0.002190416666666667" iyz="0.0" izz="0.00043749999999999995"/>
+      <mass value="1.5"/>
+      <inertia ixx="0.009387500000000002" ixy="0.0" ixz="0.0" iyy="0.009387500000000002" iyz="0.0" izz="0.0018750000000000004"/>
     </inertial>
   </link>
   <joint name="forearm_joint" type="revolute">
@@ -294,7 +294,7 @@
     <child link="forearm_link"/>
     <origin xyz="0 -0.0088 0.1007"/>
     <axis xyz="1 0 0"/>
-    <limit effort="30" lower="-1.570796326795" upper="1.570796326795" velocity="10"/>
+    <limit effort="30" lower="-2.3561944901925003" upper="2.3561944901925003" velocity="7.853985"/>
     <dynamics damping="10" friction="10.0"/>
   </joint>
   <!-- Create a link with a given name. -->
@@ -316,8 +316,8 @@
     <!-- Insert provided inertial block -->
     <inertial>
       <origin rpy="0 0 0" xyz="0 0.062 0.038"/>
-      <mass value="0.15"/>
-      <inertia ixx="0.00017544999999999998" ixy="0.0" ixz="0.0" iyy="0.00017544999999999998" iyz="0.0" izz="4.839999999999999e-05"/>
+      <mass value="1.0"/>
+      <inertia ixx="0.0011696666666666665" ixy="0.0" ixz="0.0" iyy="0.0011696666666666665" iyz="0.0" izz="0.00032266666666666663"/>
     </inertial>
   </link>
   <joint name="wrist_joint" type="revolute">
@@ -325,7 +325,7 @@
     <child link="wrist_link"/>
     <origin xyz="-0.284 0 0"/>
     <axis xyz="0 1 0"/>
-    <limit effort="30" lower="-0.39269908169875" upper="3.14159265359" velocity="10"/>
+    <limit effort="30" lower="0" upper="3.14159265359" velocity="7.853985"/>
     <dynamics damping="10" friction="10.0"/>
   </joint>
   <!-- Create a link with a given name. -->
@@ -347,8 +347,8 @@
     <!-- Insert provided inertial block -->
     <inertial>
       <origin rpy="0 0 0" xyz="0 0 -0.08"/>
-      <mass value="0.2"/>
-      <inertia ixx="0.00039697916666666674" ixy="0.0" ixz="0.0" iyy="0.00039697916666666674" iyz="0.0" izz="0.000140625"/>
+      <mass value="0.5"/>
+      <inertia ixx="0.0009924479166666667" ixy="0.0" ixz="0.0" iyy="0.0009924479166666667" iyz="0.0" izz="0.0003515625"/>
     </inertial>
   </link>
   <joint name="hand_joint" type="revolute">
@@ -356,7 +356,7 @@
     <child link="hand_link"/>
     <origin xyz="0 0.0658 0"/>
     <axis xyz="0 0 1"/>
-    <limit effort="30" lower="-1.570796326795" upper="1.570796326795" velocity="10"/>
+    <limit effort="30" lower="-2.3561944901925003" upper="2.3561944901925003" velocity="7.853985"/>
     <dynamics damping="10" friction="10.0"/>
   </joint>
   <!-- Create a link with a given name. -->
@@ -378,8 +378,8 @@
     <!-- Insert provided inertial block -->
     <inertial>
       <origin rpy="0 0 0" xyz="0.01 0 -0.05"/>
-      <mass value="0.02"/>
-      <inertia ixx="6.666666666666667e-06" ixy="0.0" ixz="0.0" iyy="6.1666666666666655e-06" iyz="0.0" izz="8.333333333333333e-07"/>
+      <mass value="0.25"/>
+      <inertia ixx="8.333333333333333e-05" ixy="0.0" ixz="0.0" iyy="7.708333333333333e-05" iyz="0.0" izz="1.0416666666666666e-05"/>
     </inertial>
   </link>
   <joint name="finger_joint" type="revolute">
@@ -387,7 +387,7 @@
     <child link="finger_link"/>
     <origin xyz="0.01 0 -0.15"/>
     <axis xyz="0 -1 0"/>
-    <limit effort="30" lower="-0.04" upper="0.7853981633975" velocity="10"/>
+    <limit effort="30" lower="0" upper="1.1780972450962501" velocity="7.853985"/>
     <dynamics damping="10" friction="10.0"/>
   </joint>
   <!-- Create a link with a given name. -->
@@ -409,8 +409,8 @@
     <!-- Insert provided inertial block -->
     <inertial>
       <origin rpy="0 0 0" xyz="-0.01 0 -0.05"/>
-      <mass value="0.02"/>
-      <inertia ixx="6.666666666666667e-06" ixy="0.0" ixz="0.0" iyy="6.1666666666666655e-06" iyz="0.0" izz="8.333333333333333e-07"/>
+      <mass value="0.25"/>
+      <inertia ixx="8.333333333333333e-05" ixy="0.0" ixz="0.0" iyy="7.708333333333333e-05" iyz="0.0" izz="1.0416666666666666e-05"/>
     </inertial>
   </link>
   <joint name="opposite_finger_joint" type="revolute">
@@ -419,7 +419,7 @@
     <origin xyz="-0.01 0 -0.15"/>
     <axis xyz="0 1 0"/>
     <mimic joint="finger_joint"/>
-    <limit effort="30" lower="-0.04" upper="0.7853981633975" velocity="10"/>
+    <limit effort="30" lower="0" upper="1.1780972450962501" velocity="7.853985"/>
     <dynamics damping="10" friction="10.0"/>
   </joint>
   <link name="tool"/>

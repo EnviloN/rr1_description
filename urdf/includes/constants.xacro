@@ -3,5 +3,6 @@
 
     <!-- Common mathematical constants -->
     <xacro:property name="PI" value="3.14159265359" />
+    <xacro:property name="RPM_TO_RAD_S" value="0.1047198" />
 
 </robot>
